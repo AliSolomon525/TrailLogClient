@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 
-// function rand() {
-//   return Math.round(Math.random() * 20) - 10;
-// }
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
 
 function getModalStyle() {
   const top = 50;
@@ -28,13 +28,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleModal(props) {
+export default function Signup() {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = useState(getModalStyle);
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const handleClose = () => {
-    props.hideModal(false);
+    setOpen(false);
   };
 
   const body = (
@@ -43,14 +48,17 @@ export default function SimpleModal(props) {
       <p id="simple-modal-description">
         Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
       </p>
-      <SimpleModal />
+      <Signup />
     </div>
   );
 
   return (
     <div>
+      <button type="button" onClick={handleOpen}>
+        Open Modal
+      </button>
       <Modal
-        open={props.showModal}
+        open={open}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"

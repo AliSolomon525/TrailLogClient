@@ -51,7 +51,7 @@ const Navbar = () => {
           </Button>
         </Toolbar>
       </AppBar>
-      <Signup showModal={open} hideModal={setOpen} />
+      {open ? <Signup showModal={open} hideModal={setOpen} /> : <div></div>}
     </div>
   );
 };
