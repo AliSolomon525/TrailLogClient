@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import "./Navbar.css";
+// import "./Navbar.css";
 import Signup from "./Signup";
 
 const useStyles = makeStyles({
@@ -17,21 +17,21 @@ const useStyles = makeStyles({
   color: {
     backgroundColor: "#FAF5FC",
   },
-  trailButton: {
-    //class name
-    //css here
-  },
+  // trailButton: {
+  //   //class name
+  //   //css here
+  // },
 });
 
-const Navbar = () => {
+const Navbar = (props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
   function showSignup() {
-    if (open === false) {
-      setOpen(true);
-    } else {
+    if (open) {
       setOpen(false);
+    } else {
+      setOpen(true);
     }
   }
   //use interpolation to step into your styling like classes.root
@@ -43,7 +43,7 @@ const Navbar = () => {
           <Typography variant="h6" className={classes.title}>
             Trail Tracker
           </Typography>
-          <Button type="button" color="#654bae" onClick={showSignup()}>
+          <Button type="button" color="#654bae" onClick={showSignup}>
             Signup
           </Button>
           <Button type="button" color="#654bae">
@@ -51,7 +51,11 @@ const Navbar = () => {
           </Button>
         </Toolbar>
       </AppBar>
-      {open ? <Signup showModal={open} hideModal={setOpen} /> : <div></div>}
+      {open ? (
+        <Signup open={open} setOpen={setOpen} token={props.token} />
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 };

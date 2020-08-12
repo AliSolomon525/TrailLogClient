@@ -1,20 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 function getModalStyle() {
   const top = 50;
   const left = 50;
 
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
+  // return {
+  //   top: `${top}%`,
+  //   left: `${left}%`,
+  //   transform: `translate(-${top}%, -${left}%)`,
+  // };
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -28,43 +25,87 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Signup() {
+const Signup = (props) => {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [showUserError, setshowUserError] = useState(false);
+  const [showPasswordError, setshowPasswordError] = useState(false);
 
   const handleClose = () => {
-    setOpen(false);
+    props.setOpen(false);
   };
 
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Text in a modal</h2>
-      <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
-      <Signup />
-    </div>
-  );
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (username.length === 0) {
+      return setshowUserError(true);
+    } else {
+      setshowUserError(false);
+    }
+    if (password.length <= 5) {
+      return setshowPasswordError(true);
+    }
+    //fetch function
+    fetch("http://localhost:3000/api/user", {
+      method: "POST",
+      body: JSON.stringify({
+        user: { username: username, passwordhash: password },
+      }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        props.updateToken(data.sessionToken);
+        props.setOpen(false);
+      });
+  };
+
+  const body = <div style={modalStyle} className={classes.paper}></div>;
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        Open Modal
-      </button>
       <Modal
-        open={open}
+        open={props.open}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
         {body}
+        <Form onSubmit={handleSubmit}>
+          <FormGroup>
+            <Label htmlFor="username">Username</Label>
+            <Input
+              onChange={(e) => setUsername(e.target.value)}
+              name="username"
+              value={username}
+            />
+            <br />
+            {showUserError === true ? <p>Username cannot be blank</p> : null}
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="password">Password</Label>
+            <Input
+              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              value={password}
+            />
+            <br />
+            {showPasswordError === true ? (
+              <p>Password cannot be blank</p>
+            ) : null}
+          </FormGroup>
+          <Button type="submit">Signup</Button>
+        </Form>
       </Modal>
     </div>
   );
-}
+};
+
+export default Signup;
