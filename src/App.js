@@ -37,9 +37,8 @@ function App() {
   return (
     <div className="App">
       <Navbar clickLogout={clearToken} />
-      {protectedViews()}
-      <Image />
-      <Signup />
+      {/* {protectedViews()} */}
+      {/* <Image /> */}
       {sessionToken ? <Trails /> : <Homepage />}
     </div>
   );

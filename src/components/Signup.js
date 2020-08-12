@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 function getModalStyle() {
   const top = 50;
   const left = 50;
 
-  // return {
-  //   top: `${top}%`,
-  //   left: `${left}%`,
-  //   transform: `translate(-${top}%, -${left}%)`,
-  // };
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -67,7 +66,16 @@ const Signup = (props) => {
       });
   };
 
-  const body = <div style={modalStyle} className={classes.paper}></div>;
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      {/* <form className={classes.root} noValidate autoComplete="off">
+        <TextField id="standard-basic" label="Standard" />
+        <TextField id="filled-basic" label="Filled" variant="filled" />
+        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+      </form> */}
+    </div>
+  );
+  //add form code inside the body div & import from Matieral UI (look at documentation)
 
   return (
     <div>
@@ -78,31 +86,6 @@ const Signup = (props) => {
         aria-describedby="simple-modal-description"
       >
         {body}
-        <Form onSubmit={handleSubmit}>
-          <FormGroup>
-            <Label htmlFor="username">Username</Label>
-            <Input
-              onChange={(e) => setUsername(e.target.value)}
-              name="username"
-              value={username}
-            />
-            <br />
-            {showUserError === true ? <p>Username cannot be blank</p> : null}
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="password">Password</Label>
-            <Input
-              onChange={(e) => setPassword(e.target.value)}
-              name="password"
-              value={password}
-            />
-            <br />
-            {showPasswordError === true ? (
-              <p>Password cannot be blank</p>
-            ) : null}
-          </FormGroup>
-          <Button type="submit">Signup</Button>
-        </Form>
       </Modal>
     </div>
   );
