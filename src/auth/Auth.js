@@ -1,19 +1,13 @@
 import React from "react";
-import { Container, Row, Col } from "reactstrap";
-import Signup from "./Signup";
-import Login from "./Login";
+import Container from "@material-ui/core/Container";
+import Signup from "../components/Signup";
+import Login from "../components/Login";
 
 const Auth = (props) => {
   return (
-    <Container className="auth-container">
-      <Row>
-        <Col md="6">
-          <Signup updateToken={props.updateToken} />
-        </Col>
-        <Col md="6" className="login-col">
-          <Login updateToken={props.updateToken} />
-        </Col>
-      </Row>
+    <Container>
+      <Signup updateToken={props.updateToken} />
+      <Login updateToken={props.updateToken} />
     </Container>
   );
 };

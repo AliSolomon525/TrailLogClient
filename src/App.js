@@ -5,7 +5,7 @@ import Homepage from "./components/Homepage";
 import Trails from "./logs/Trails";
 import Auth from "./auth/Auth";
 import Signup from "./components/Signup";
-// import Login from "./auth/Login";
+import Login from "./components/Login";
 
 import "./App.css";
 
@@ -36,10 +36,13 @@ function App() {
   };
   return (
     <div className="App">
+      {/* <Signup />
+      <Login /> */}
       <Navbar clickLogout={clearToken} />
       {/* {protectedViews()} */}
       {/* <Image /> */}
       {sessionToken ? <Trails /> : <Homepage />}
+      <Auth updateToken={updateToken} />
     </div>
   );
 }

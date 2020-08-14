@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 // import "./Navbar.css";
 import Signup from "./Signup";
+import Login from "./Login";
 
 const useStyles = makeStyles({
   root: {
@@ -34,6 +35,15 @@ const Navbar = (props) => {
       setOpen(true);
     }
   }
+
+  function showLogin() {
+    if (open) {
+      setOpen(false);
+    } else {
+      setOpen(true);
+    }
+  }
+
   //use interpolation to step into your styling like classes.root
 
   return (
@@ -46,13 +56,18 @@ const Navbar = (props) => {
           <Button type="button" color="#654bae" onClick={showSignup}>
             Signup
           </Button>
-          <Button type="button" color="#654bae">
+          <Button type="button" color="#654bae" onClick={showLogin}>
             Login
           </Button>
         </Toolbar>
       </AppBar>
       {open ? (
         <Signup open={open} setOpen={setOpen} token={props.token} />
+      ) : (
+        <div></div>
+      )}
+      {open ? (
+        <Login open={open} setOpen={setOpen} token={props.token} />
       ) : (
         <div></div>
       )}

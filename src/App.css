@@ -6,3 +6,12 @@ h6 {
   color: black;
   font-family: Verdana, Geneva, sans-serif;
 }
+
+h2 {
+  text-align: left;
+  /* font-weight: bold; */
+  justify-content: left;
+  text-transform: uppercase;
+  color: black;
+  font-family: Verdana, Geneva, sans-serif;
+}

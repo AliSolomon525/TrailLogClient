@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Signup = (props) => {
+const Login = (props) => {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
@@ -52,7 +52,7 @@ const Signup = (props) => {
       return setshowPasswordError(true);
     }
     //fetch function
-    fetch("http://localhost:3000/api/user", {
+    fetch("http://localhost:3000/api/user/login", {
       method: "POST",
       body: JSON.stringify({
         user: { username: username, passwordhash: password },
@@ -70,14 +70,8 @@ const Signup = (props) => {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2>Signup</h2>
-      <form
-        className={classes.root}
-        noValidate
-        autoComplete="off"
-        // action="/api/user"
-        // method="POST"}
-      >
+      <h2>Login</h2>
+      <form className={classes.root} noValidate autoComplete="off">
         <TextField
           onChange={(e) => setUsername(e.target.value)}
           id="outlined-basic"
@@ -116,4 +110,4 @@ const Signup = (props) => {
   );
 };
 
-export default Signup;
+export default Login;
