@@ -5,8 +5,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 // import "./Navbar.css";
-import Signup from "./Signup";
-import Login from "./Login";
+import Signup from "../auth/Signup";
+import Login from "../auth/Login";
+// import Auth from "../auth/Auth";
 
 const useStyles = makeStyles({
   root: {
@@ -27,6 +28,7 @@ const useStyles = makeStyles({
 const Navbar = (props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
 
   function showSignup() {
     if (open) {
@@ -37,8 +39,8 @@ const Navbar = (props) => {
   }
 
   function showLogin() {
-    if (open) {
-      setOpen(false);
+    if (openLogin) {
+      setOpenLogin(false);
     } else {
       setOpen(true);
     }
@@ -62,15 +64,31 @@ const Navbar = (props) => {
         </Toolbar>
       </AppBar>
       {open ? (
-        <Signup open={open} setOpen={setOpen} token={props.token} />
+        <Signup
+          open={open}
+          setOpen={setOpen}
+          token={props.token}
+          updateToken={props.updateToken}
+        />
       ) : (
         <div></div>
       )}
-      {open ? (
-        <Login open={open} setOpen={setOpen} token={props.token} />
+      {openLogin ? (
+        <Login
+          open={openLogin}
+          setOpen={setOpenLogin}
+          token={props.token}
+          updateToken={props.updateToken}
+        />
       ) : (
         <div></div>
       )}
+      {/* <Auth
+      // open={open}
+      // setOpen={setOpen}
+      // token={props.token}
+      // updateToken={props.updateToken}
+      /> */}
     </div>
   );
 };

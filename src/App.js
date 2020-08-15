@@ -4,8 +4,8 @@ import Image from "../src/components/Image";
 import Homepage from "./components/Homepage";
 import Trails from "./logs/Trails";
 import Auth from "./auth/Auth";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
+import Signup from "./auth/Signup";
+import Login from "./auth/Login";
 
 import "./App.css";
 
@@ -34,15 +34,16 @@ function App() {
       <Auth updateToken={updateToken} />
     );
   };
+
   return (
     <div className="App">
       {/* <Signup />
       <Login /> */}
-      <Navbar clickLogout={clearToken} />
+      <Navbar clickLogout={clearToken} updateToken={updateToken} />
       {/* {protectedViews()} */}
       {/* <Image /> */}
       {sessionToken ? <Trails /> : <Homepage />}
-      <Auth updateToken={updateToken} />
+      {/* <Auth updateToken={updateToken} /> */}
     </div>
   );
 }

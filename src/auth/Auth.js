@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import Signup from "../components/Signup";
-import Login from "../components/Login";
+import Signup from "./Signup";
+import Login from "./Login";
 
 const Auth = (props) => {
   return (
