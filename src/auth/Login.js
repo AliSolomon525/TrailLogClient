@@ -92,6 +92,9 @@ const Login = (props) => {
       <Button onClick={handleSubmit} variant="contained" type="submit">
         Submit
       </Button>
+      <Button onClick={handleClose} variant="contained">
+        Close
+      </Button>
     </div>
   );
   //add form code inside the body div & import from Matieral UI (look at documentation)

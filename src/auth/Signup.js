@@ -52,7 +52,7 @@ const Signup = (props) => {
       return setshowPasswordError(true);
     }
     //fetch function
-    fetch("http://localhost:3000/api/user/", {
+    fetch("http://localhost:3000/api/user", {
       method: "POST",
       body: JSON.stringify({
         user: { username: username, passwordhash: password },
@@ -91,6 +91,9 @@ const Signup = (props) => {
       <br />
       <Button onClick={handleSubmit} variant="contained" type="submit">
         Submit
+      </Button>
+      <Button onClick={handleClose} variant="contained">
+        Close
       </Button>
     </div>
   );

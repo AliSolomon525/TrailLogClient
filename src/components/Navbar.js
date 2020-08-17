@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import Signup from "../auth/Signup";
 import Login from "../auth/Login";
 // import Auth from "../auth/Auth";
+// import Image from "./Image";
 
 const useStyles = makeStyles({
   root: {
@@ -42,7 +43,7 @@ const Navbar = (props) => {
     if (openLogin) {
       setOpenLogin(false);
     } else {
-      setOpen(true);
+      setOpenLogin(true);
     }
   }
 
@@ -64,12 +65,7 @@ const Navbar = (props) => {
         </Toolbar>
       </AppBar>
       {open ? (
-        <Signup
-          open={open}
-          setOpen={setOpen}
-          token={props.token}
-          updateToken={props.updateToken}
-        />
+        <Signup open={open} setOpen={setOpen} updateToken={props.updateToken} />
       ) : (
         <div></div>
       )}
@@ -77,18 +73,12 @@ const Navbar = (props) => {
         <Login
           open={openLogin}
           setOpen={setOpenLogin}
-          token={props.token}
           updateToken={props.updateToken}
         />
       ) : (
         <div></div>
       )}
-      {/* <Auth
-      // open={open}
-      // setOpen={setOpen}
-      // token={props.token}
-      // updateToken={props.updateToken}
-      /> */}
+      {/* <Image /> */}
     </div>
   );
 };

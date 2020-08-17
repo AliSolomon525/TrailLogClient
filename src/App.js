@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../src/components/Navbar";
 import Image from "../src/components/Image";
 import Homepage from "./components/Homepage";
-import Trails from "./logs/Trails";
+import TrailIndex from "./logs/TrailIndex";
 import Auth from "./auth/Auth";
 import Signup from "./auth/Signup";
 import Login from "./auth/Login";
@@ -27,13 +27,13 @@ function App() {
     setSessionToken("");
   };
 
-  const protectedViews = () => {
-    return localStorage.getItem("token") === sessionToken ? (
-      <Homepage token={sessionToken} />
-    ) : (
-      <Auth updateToken={updateToken} />
-    );
-  };
+  // const protectedViews = () => {
+  //   return localStorage.getItem("token") === sessionToken ? (
+  //     <Homepage token={sessionToken} />
+  //   ) : (
+  //     <Auth updateToken={updateToken} />
+  //   );
+  // };
 
   return (
     <div className="App">
@@ -42,7 +42,7 @@ function App() {
       <Navbar clickLogout={clearToken} updateToken={updateToken} />
       {/* {protectedViews()} */}
       {/* <Image /> */}
-      {sessionToken ? <Trails /> : <Homepage />}
+      {sessionToken ? <TrailIndex /> : <Homepage />}
       {/* <Auth updateToken={updateToken} /> */}
     </div>
   );
