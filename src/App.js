@@ -3,14 +3,16 @@ import Navbar from "../src/components/Navbar";
 import Image from "../src/components/Image";
 import Homepage from "./components/Homepage";
 import TrailIndex from "./logs/TrailIndex";
+import TrailCreate from "./logs/TrailCreate";
 import Auth from "./auth/Auth";
 import Signup from "./auth/Signup";
 import Login from "./auth/Login";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 import "./App.css";
 
 function App() {
-  // const [token, setToken] = useState("trail");
+  const [token, setToken] = useState("trail");
   const [sessionToken, setSessionToken] = useState("");
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -27,22 +29,27 @@ function App() {
     setSessionToken("");
   };
 
-  // const protectedViews = () => {
-  //   return localStorage.getItem("token") === sessionToken ? (
-  //     <Homepage token={sessionToken} />
-  //   ) : (
-  //     <Auth updateToken={updateToken} />
-  //   );
-  // };
+  const protectedViews = () => {
+    return localStorage.getItem("token") === sessionToken ? (
+      <Homepage token={sessionToken} />
+    ) : (
+      <Auth updateToken={updateToken} />
+    );
+  };
 
   return (
     <div className="App">
+      {/* <CssBaseline /> */}
       {/* <Signup />
       <Login /> */}
-      <Navbar clickLogout={clearToken} updateToken={updateToken} />
-      {/* {protectedViews()} */}
+      <Navbar
+        clickLogout={clearToken}
+        updateToken={updateToken}
+        clickLogout={clearToken}
+      />
+      {protectedViews()}
       {/* <Image /> */}
-      {sessionToken ? <TrailIndex /> : <Homepage />}
+      {sessionToken ? <TrailCreate /> : <Homepage />}
       {/* <Auth updateToken={updateToken} /> */}
     </div>
   );

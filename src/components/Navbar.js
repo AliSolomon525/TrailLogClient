@@ -62,6 +62,9 @@ const Navbar = (props) => {
           <Button type="button" color="#654bae" onClick={showLogin}>
             Login
           </Button>
+          <Button type="button" color="#654bae" onClick={props.clickLogout}>
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
       {open ? (

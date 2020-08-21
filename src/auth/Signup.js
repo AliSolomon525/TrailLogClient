@@ -3,6 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { Input } from "@material-ui/core";
+import InputTextFields from "../inputs/InputTextFields";
 
 function getModalStyle() {
   const top = 50;
@@ -72,24 +75,24 @@ const Signup = (props) => {
     <div style={modalStyle} className={classes.paper}>
       <h2>Signup</h2>
       <form className={classes.root} noValidate autoComplete="off">
-        <TextField
-          onChange={(e) => setUsername(e.target.value)}
-          id="outlined-basic"
-          label="Username"
-          variant="outlined"
+        <InputTextFields
+          name="Username"
           value={username}
+          callback={setUsername}
         />
-        <br />
-        <TextField
-          onChange={(e) => setPassword(e.target.value)}
-          id="outlined-basic"
-          label="Password"
-          variant="outlined"
+        <InputTextFields
+          name="Password"
           value={password}
+          callback={setPassword}
         />
       </form>
       <br />
-      <Button onClick={handleSubmit} variant="contained" type="submit">
+      <Button
+        onClick={handleSubmit}
+        variant="contained"
+        type="submit"
+        spacing={0}
+      >
         Submit
       </Button>
       <Button onClick={handleClose} variant="contained">

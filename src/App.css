@@ -15,3 +15,8 @@ h2 {
   color: black;
   font-family: Verdana, Geneva, sans-serif;
 }
+
+.paper {
+  text-transform: uppercase;
+  padding: 2px;
+}
