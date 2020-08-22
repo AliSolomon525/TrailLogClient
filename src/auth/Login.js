@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  but: {
+    marginRight: theme.spacing(1),
+  },
 }));
 
 const Login = (props) => {
@@ -85,10 +88,15 @@ const Login = (props) => {
         />
       </form>
       <br />
-      <Button onClick={handleSubmit} variant="contained" type="submit">
+      <Button
+        onClick={handleSubmit}
+        variant="contained"
+        type="submit"
+        className={classes.but}
+      >
         Submit
       </Button>
-      <Button onClick={handleClose} variant="contained">
+      <Button onClick={handleClose} variant="contained" className={classes.but}>
         Close
       </Button>
     </div>

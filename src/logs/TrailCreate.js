@@ -17,9 +17,23 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     // color: theme.palette.text.secondary,
   },
-
-  body: {
-    background: "blue",
+  title: {
+    textAlign: "center",
+  },
+  container: {
+    display: "flex",
+    flexWrap: "wrap",
+    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(1),
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
+  but: {
+    marginLeft: theme.spacing(1),
+    textAlign: "center",
   },
 }));
 
@@ -45,8 +59,8 @@ const TrailCreate = (props) => {
           date: date,
           location: location,
           trailName: trailName,
-          totalTrailLength: totalTrailLength,
-          totalMilesHiked: totalMilesHiked,
+          totalTrailLength: Number(totalTrailLength),
+          totalMilesHiked: +totalMilesHiked,
           conditions: conditions,
           foodConsumed: foodConsumed,
           waterConsumed: waterConsumed,
@@ -75,18 +89,24 @@ const TrailCreate = (props) => {
   };
 
   return (
-    <div className="body">
-      <h2 className="title">Start Tracking!</h2>
+    <div className={classes.root}>
+      <h2 className={classes.title}>Track Your Trail:</h2>
       <br />
       <div className={classes.root}>
         <Grid container spacing={0}>
           <Grid item xs={12} md={6}>
-            <InputTextFields
-              name="Date"
-              value={date}
-              callback={setDate}
-              width="75ch"
-            />
+            <form className={classes.container} noValidate>
+              <TextField
+                id="date"
+                variant="outlined"
+                label="Date"
+                type="date"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </form>
             <InputTextFields
               name="Location"
               value={location}
@@ -149,9 +169,11 @@ const TrailCreate = (props) => {
       </div>
       <br />
       <Button
+        className={classes.but}
         type="submit"
-        id="outlined-basic"
-        justify="center"
+        variant="contained"
+        size="medium"
+        textAlign="center"
         onClick={handleSubmit}
       >
         Submit

@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  but: {
+    marginRight: theme.spacing(1),
+  },
 }));
 
 const Signup = (props) => {
@@ -88,6 +91,7 @@ const Signup = (props) => {
       </form>
       <br />
       <Button
+        className={classes.but}
         onClick={handleSubmit}
         variant="contained"
         type="submit"
@@ -95,7 +99,7 @@ const Signup = (props) => {
       >
         Submit
       </Button>
-      <Button onClick={handleClose} variant="contained">
+      <Button onClick={handleClose} variant="contained" className={classes.but}>
         Close
       </Button>
     </div>

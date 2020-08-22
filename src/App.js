@@ -12,7 +12,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import "./App.css";
 
 function App() {
-  const [token, setToken] = useState("trail");
   const [sessionToken, setSessionToken] = useState("");
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -31,9 +30,12 @@ function App() {
 
   const protectedViews = () => {
     return localStorage.getItem("token") === sessionToken ? (
-      <Homepage token={sessionToken} />
+      <TrailCreate token={sessionToken} />
     ) : (
-      <Auth updateToken={updateToken} />
+      <div>
+        <Homepage />
+        <Auth updateToken={updateToken} />
+      </div>
     );
   };
 
@@ -49,7 +51,7 @@ function App() {
       />
       {protectedViews()}
       {/* <Image /> */}
-      {sessionToken ? <TrailCreate /> : <Homepage />}
+      {/* {sessionToken ? <TrailCreate token={sessionToken} /> : <Homepage />} */}
       {/* <Auth updateToken={updateToken} /> */}
     </div>
   );

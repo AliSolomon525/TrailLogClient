@@ -13,12 +13,13 @@ import Login from "../auth/Login";
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
+    fontStyle: "whitesmoke",
   },
   title: {
     flexGrow: 1,
   },
   color: {
-    backgroundColor: "#FAF5FC",
+    backgroundColor: "#aac1be",
   },
   // trailButton: {
   //   //class name
@@ -56,7 +57,7 @@ const Navbar = (props) => {
           <Typography variant="h6" className={classes.title}>
             Trail Tracker
           </Typography>
-          <Button type="button" color="#654bae" onClick={showSignup}>
+          <Button type="button" color="white" onClick={showSignup}>
             Signup
           </Button>
           <Button type="button" color="#654bae" onClick={showLogin}>
