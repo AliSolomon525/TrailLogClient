@@ -24,53 +24,63 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function TrailsTable() {
+function TrailsTable(props) {
   const classes = useStyles();
 
-  function createData(date) {
-    return { date };
+  function displayHeaders() {
+    const headers = [
+      "Date",
+      "Location",
+      "Trail Name",
+      "Total Trail Length",
+      "Total Miles Hiked",
+      "Conditions",
+      "Food Consumed",
+      "Water Consumed",
+      "Description",
+    ];
+    return headers.map((header) => <TableCell>{header}</TableCell>);
   }
 
-  const rows = [createData("date")];
+  // const deleteOption = (props) => {
+  //   const deleteTrail = (trail) => {
+  //     fetch(`http://localhost:3000/api/log/delete/${trail.id}`, {
+  //       method: "DELETE",
+  //       headers: new Headers({
+  //         "Content-Type": "application/json",
+  //         Authorization: props.token,
+  //       }),
+  //     }).then(() => props.fetchTrails());
+  //   };
 
-  const deleteOption = (props) => {
-    const deleteTrail = (trail) => {
-      fetch(`http://localhost:3000/api/log/delete/${trail.id}`, {
-        method: "DELETE",
-        headers: new Headers({
-          "Content-Type": "application/json",
-          Authorization: props.token,
-        }),
-      }).then(() => props.fetchTrails());
-    };
-
-    return (
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TrailCreate
-                fetchTrails={props.fetchTrails}
-                token={props.token}
-              />
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {props.trails.map((row) => (
-              <TableRow key={row.name}>
-                <TableCell component="th" scope="row">
-                  {row.date}
-                </TableCell>
-                <TableCell align="right">{row.location}</TableCell>
+  return (
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>{displayHeaders()}</TableRow>
+        </TableHead>
+        <TableBody>
+          {props.trails ? (
+            props.trails.map((row, index) => (
+              <TableRow key={index}>
+                <TableCell align="center">{row.date}</TableCell>
+                <TableCell align="center">{row.location}</TableCell>
+                <TableCell align="center">{row.trailName}</TableCell>
+                <TableCell align="center">{row.totalTrailLength}</TableCell>
+                <TableCell align="center">{row.totalMilesHiked}</TableCell>
+                <TableCell align="center">{row.conditions}</TableCell>
+                <TableCell align="center">{row.foodConsumed}</TableCell>
+                <TableCell align="center">{row.waterConsumed}</TableCell>
+                <TableCell align="center">{row.description}</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
-  };
+            ))
+          ) : (
+            <div></div>
+          )}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }
 
 export default TrailsTable;

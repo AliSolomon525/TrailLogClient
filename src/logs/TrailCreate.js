@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
   but: {
     marginLeft: theme.spacing(1),
     textAlign: "center",
+    marginBottom: theme.spacing(2),
   },
 }));
 
@@ -111,13 +112,13 @@ const TrailCreate = (props) => {
               name="Location"
               value={location}
               callback={setLocation}
-              width="75ch"
+              width="70ch"
             />
             <InputTextFields
               name="Trail Name"
               value={trailName}
               callback={setTrailName}
-              width="75ch"
+              width="70ch"
             />
           </Grid>
           <br />
@@ -178,6 +179,7 @@ const TrailCreate = (props) => {
       >
         Submit
       </Button>
+      <hr />
     </div>
   );
 };

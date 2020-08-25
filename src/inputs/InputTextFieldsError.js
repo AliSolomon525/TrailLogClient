@@ -9,20 +9,13 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
     },
   },
-  size: {
-    "& > *": {
-      margin: "auto",
-      width: "100ch",
-      maxWidth: 500,
-    },
-  },
   "& .MuiTextField-root": {
     margin: theme.spacing(1),
     width: 200,
   },
 }));
 
-export default function InputTextFields(props) {
+export default function ValidationTextFields(props) {
   const classes = useStyles();
 
   return (
@@ -33,8 +26,11 @@ export default function InputTextFields(props) {
       style={{ width: props.width, maxHeight: props.maxHeight }}
     >
       <TextField
-        label={props.name}
+        error
+        id="outlined-error-helper-text"
+        helperText="Incorrect entry"
         variant="outlined"
+        label={props.name}
         name={props.name}
         value={props.value}
         onChange={(e) => props.callback(e.target.value)}

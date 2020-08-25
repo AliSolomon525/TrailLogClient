@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Input } from "@material-ui/core";
+import InputTextFieldsError from "../inputs/InputTextFieldsError";
 import InputTextFields from "../inputs/InputTextFields";
 
 function getModalStyle() {
@@ -57,7 +58,7 @@ const Signup = (props) => {
     if (password.length <= 5) {
       return setshowPasswordError(true);
     }
-    //fetch function
+
     fetch("http://localhost:3000/api/user", {
       method: "POST",
       body: JSON.stringify({
@@ -78,12 +79,13 @@ const Signup = (props) => {
     <div style={modalStyle} className={classes.paper}>
       <h2>Signup</h2>
       <form className={classes.root} noValidate autoComplete="off">
-        <InputTextFields
+        <InputTextFieldsError
           name="Username"
           value={username}
           callback={setUsername}
+          error={username === 0 ? showUserError : true}
         />
-        <InputTextFields
+        <InputTextFieldsError
           name="Password"
           value={password}
           callback={setPassword}

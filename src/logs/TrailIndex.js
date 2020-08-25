@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import TrailCreate from "./TrailCreate";
 import TrailsTable from "./TrailsTable";
-import WorkoutEdit from "./WorkoutEdit";
+import TrailEdit from "./TrailEdit";
 
 const TrailIndex = (props) => {
   const [trails, setTrails] = useState([]);
@@ -19,6 +19,7 @@ const TrailIndex = (props) => {
     })
       .then((res) => res.json())
       .then((logData) => {
+        console.log(logData);
         setTrails(logData);
       });
   };
@@ -27,9 +28,9 @@ const TrailIndex = (props) => {
     fetchTrails();
   }, []);
 
-  const editUpdateTrail = (workout) => {
-    setTrailToUpdate(workout);
-    console.log(workout);
+  const editUpdateTrail = (trail) => {
+    setTrailToUpdate(trail);
+    console.log(trail);
   };
 
   const updateOn = () => {
@@ -42,7 +43,7 @@ const TrailIndex = (props) => {
 
   return (
     <Container>
-      <TrailCreate fetchTrails={props.fetchTrails} token={props.token} />
+      <TrailCreate fetchTrails={fetchTrails} token={props.token} />
       <TrailsTable
         trails={trails}
         editUpdateTrail={editUpdateTrail}
@@ -50,8 +51,8 @@ const TrailIndex = (props) => {
         fetchTrails={fetchTrails}
         token={props.token}
       />
-      {/* {updateActive ? (
-        <WorkoutEdit
+      {updateActive ? (
+        <TrailEdit
           trailToUpdate={trailToUpdate}
           updateOff={updateOff}
           token={props.token}
@@ -59,7 +60,7 @@ const TrailIndex = (props) => {
         />
       ) : (
         <div></div>
-      )} */}
+      )}
     </Container>
   );
 };

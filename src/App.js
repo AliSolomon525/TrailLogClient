@@ -30,7 +30,7 @@ function App() {
 
   const protectedViews = () => {
     return localStorage.getItem("token") === sessionToken ? (
-      <TrailCreate token={sessionToken} />
+      <TrailIndex token={sessionToken} />
     ) : (
       <div>
         <Homepage />
