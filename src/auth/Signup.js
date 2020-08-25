@@ -7,6 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { Input } from "@material-ui/core";
 import InputTextFieldsError from "../inputs/InputTextFieldsError";
 import InputTextFields from "../inputs/InputTextFields";
+import APIURL from "../helpers/environment";
 
 function getModalStyle() {
   const top = 50;
@@ -59,7 +60,7 @@ const Signup = (props) => {
       return setshowPasswordError(true);
     }
 
-    fetch("http://localhost:3000/api/user", {
+    fetch(`${APIURL}/api/user`, {
       method: "POST",
       body: JSON.stringify({
         user: { username: username, passwordhash: password },

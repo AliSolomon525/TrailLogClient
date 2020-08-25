@@ -3,6 +3,7 @@ import Container from "@material-ui/core/Container";
 import TrailCreate from "./TrailCreate";
 import TrailsTable from "./TrailsTable";
 import TrailEdit from "./TrailEdit";
+import APIURL from "../helpers/environment";
 
 const TrailIndex = (props) => {
   const [trails, setTrails] = useState([]);
@@ -10,7 +11,7 @@ const TrailIndex = (props) => {
   const [trailToUpdate, setTrailToUpdate] = useState({});
 
   const fetchTrails = () => {
-    fetch("http://localhost:3000/api/log", {
+    fetch(`${APIURL}/api/log`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",

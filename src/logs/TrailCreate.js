@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import { blue } from "@material-ui/core/colors";
 import InputTextFields from "../inputs/InputTextFields";
 import { sizing } from "@material-ui/system";
+import APIURL from "../helpers/environment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,7 +54,7 @@ const TrailCreate = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/api/log", {
+    fetch(`${APIURL}/api/log`, {
       method: "POST",
       body: JSON.stringify({
         log: {

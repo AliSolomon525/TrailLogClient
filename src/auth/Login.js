@@ -4,6 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import InputTextFields from "../inputs/InputTextFields";
+import APIURL from "../helpers/environment";
 
 function getModalStyle() {
   const top = 50;
@@ -56,7 +57,7 @@ const Login = (props) => {
       return setshowPasswordError(true);
     }
     //fetch function
-    fetch("http://localhost:3000/api/user/login", {
+    fetch(`${APIURL}/api/user/login`, {
       method: "POST",
       body: JSON.stringify({
         user: { username: username, passwordhash: password },

@@ -9,6 +9,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TrailCreate from "./TrailCreate";
 import TrailIndex from "./TrailIndex";
+import APIURL from "../helpers/environment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,7 +45,7 @@ function TrailsTable(props) {
 
   // const deleteOption = (props) => {
   //   const deleteTrail = (trail) => {
-  //     fetch(`http://localhost:3000/api/log/delete/${trail.id}`, {
+  //     fetch(`${APIURL}/api/log/delete/${trail.id}`, {
   //       method: "DELETE",
   //       headers: new Headers({
   //         "Content-Type": "application/json",

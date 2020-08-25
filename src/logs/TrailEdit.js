@@ -8,6 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import APIURL from "../helpers/environment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,7 +31,7 @@ const TrailEdit = (props) => {
 
   const trailUpdate = (event, trail) => {
     event.preventDefault();
-    fetch(`http://localhost:3000/api/log/update/${props.trailToUpdate.id}`, {
+    fetch(`${APIURL}/api/log/update/${props.trailToUpdate.id}`, {
       method: "PUT",
       body: JSON.stringify({
         log: { description: editDesc },
