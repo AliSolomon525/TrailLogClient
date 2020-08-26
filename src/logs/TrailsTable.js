@@ -64,7 +64,7 @@ function TrailsTable(props) {
           {props.trails ? (
             props.trails.map((row, index) => (
               <TableRow key={index}>
-                <TableCell align="center">{row.date}</TableCell>
+                <TableCell align="center">{row.date.slice(0, 10)}</TableCell>
                 <TableCell align="center">{row.location}</TableCell>
                 <TableCell align="center">{row.trailName}</TableCell>
                 <TableCell align="center">{row.totalTrailLength}</TableCell>

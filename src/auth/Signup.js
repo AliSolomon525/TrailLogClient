@@ -51,8 +51,11 @@ const Signup = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (username.length === 0) {
-      return setshowUserError(true);
+    const isValidEmail = username.includes("@");
+
+    if (!isValidEmail) {
+      setshowUserError(true);
+      return;
     } else {
       setshowUserError(false);
     }
@@ -80,17 +83,24 @@ const Signup = (props) => {
     <div style={modalStyle} className={classes.paper}>
       <h2>Signup</h2>
       <form className={classes.root} noValidate autoComplete="off">
-        <InputTextFieldsError
+        <InputTextFields
           name="Username"
           value={username}
           callback={setUsername}
-          error={username === 0 ? showUserError : true}
+          // required={true}
         />
-        <InputTextFieldsError
+        {showUserError === true ? <p>Invalid Email</p> : null}
+        <InputTextFields
           name="Password"
           value={password}
           callback={setPassword}
+          // required={true}
+          // errorText={["password must be 5 or more characters"]}
+          // inputProps={{ minLength: 5 }}
         />
+        {showPasswordError === true ? (
+          <p>Password must contain at least 5 characters</p>
+        ) : null}
       </form>
       <br />
       <Button

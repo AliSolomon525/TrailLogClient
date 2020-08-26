@@ -90,6 +90,15 @@ const TrailCreate = (props) => {
       });
   };
 
+  function formatDate(date) {
+    const normalizeDate = new Date(date);
+    return normalizeDate.toISOString();
+  }
+
+  useEffect(() => {
+    console.log(date);
+  }, [date]);
+
   return (
     <div className={classes.root}>
       <h2 className={classes.title}>Track Your Trail:</h2>
@@ -103,6 +112,8 @@ const TrailCreate = (props) => {
                 variant="outlined"
                 label="Date"
                 type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true,

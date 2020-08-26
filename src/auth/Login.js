@@ -48,8 +48,11 @@ const Login = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (username.length === 0) {
-      return setshowUserError(true);
+    const isValidEmail = username.includes("@");
+
+    if (!isValidEmail) {
+      setshowUserError(true);
+      return;
     } else {
       setshowUserError(false);
     }
@@ -82,11 +85,15 @@ const Login = (props) => {
           value={username}
           callback={setUsername}
         />
+        {showUserError === true ? <p>Invalid Email</p> : null}
         <InputTextFields
           name="Password"
           value={password}
           callback={setPassword}
         />
+        {showPasswordError === true ? (
+          <p>Password must contain at least 5 characters</p>
+        ) : null}
       </form>
       <br />
       <Button
