@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     "& > *": {
       margin: "auto",
       width: "100ch",
-      maxWidth: 500,
+      // maxWidth: 500,
     },
   },
   "& .MuiTextField-root": {

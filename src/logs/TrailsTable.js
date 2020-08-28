@@ -46,8 +46,8 @@ function TrailsTable(props) {
   }
 
   // const deleteOption = (props) => {
-  //   const deleteTrail = (trail) => {
-  //     fetch(`${APIURL}/api/log/delete/${trail.id}`, {
+  //   const deleteTrail = (trails) => {
+  //     fetch(`${APIURL}/api/log/delete/${trails.id}`, {
   //       method: "DELETE",
   //       headers: new Headers({
   //         "Content-Type": "application/json",
@@ -76,18 +76,16 @@ function TrailsTable(props) {
                 <TableCell align="center">{row.waterConsumed}</TableCell>
                 <TableCell align="center">{row.description}</TableCell>
                 <TableCell align="center">
-                  {/* <Button
-                    onClick={(e) => alert("I worked")}
-                    // editUpdateTrail={editUpdateTrail}
-                  >
+                  <Button className={classes.but} variant="outlined">
                     Update
-                  </Button> */}
-                  <Update trailData={row} />
+                    <Update className={classes.but} trailData={row} />
+                  </Button>
                 </TableCell>
                 <TableCell align="center">
                   <Button
+                    variant="outlined"
                     className={classes.but}
-                    onClick={(e) => alert("I worked")}
+                    // onClick={() => deleteTrail(props.trails)}
                   >
                     Delete
                   </Button>

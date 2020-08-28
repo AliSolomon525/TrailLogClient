@@ -15,17 +15,29 @@ function getModalStyle() {
     top: `${top}%`,
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
+    overflow: "scroll",
   };
 }
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 400,
+    width: 500,
+    height: 500,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(0),
+  },
+  textField: {
+    padding: theme.spacing(1),
+  },
+  InputTextFields: {
+    width: 500,
+  },
+  but: {
+    marginLeft: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
 }));
 
@@ -91,22 +103,22 @@ const TrailEdit = (props) => {
   );
   const [description, setDescription] = useState(props.trailData.description);
 
-  //   const trailUpdate = (event, trail) => {
-  //     event.preventDefault();
-  //     fetch(`${APIURL}/api/log/update/${props.trailToUpdate.id}`, {
-  //       method: "PUT",
-  //       body: JSON.stringify({
-  //         log: { description: editDesc },
-  //       }),
-  //       headers: new Headers({
-  //         "Content-Type": "application/json",
-  //         Authorization: props.token,
-  //       }),
-  //     }).then((res) => {
-  //       props.fetchTrails();
-  //       props.updateOff();
-  //     });
-  //   };
+  const trailUpdate = (event, trail) => {
+    event.preventDefault();
+    fetch(`${APIURL}/api/log/update/${props.trailToUpdate.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        // log: { date, editDate },
+      }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: props.token,
+      }),
+    }).then((res) => {
+      props.fetchTrails();
+      props.updateOff();
+    });
+  };
 
   return (
     <div>
@@ -114,14 +126,14 @@ const TrailEdit = (props) => {
       <br />
       <div>
         <Grid container spacing={0}>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={10}>
             <form className={classes.container} noValidate>
               <TextField
                 id="date"
                 variant="outlined"
                 label="Date"
                 type="date"
-                value={date}
+                // value={editDate}
                 onChange={(e) => setDate(e.target.value)}
                 className={classes.textField}
                 InputLabelProps={{
@@ -133,37 +145,32 @@ const TrailEdit = (props) => {
               name="Location"
               value={location}
               callback={setLocation}
-              width="70ch"
+              width="100%"
             />
             <InputTextFields
               name="Trail Name"
               value={trailName}
               callback={setTrailName}
-              width="70ch"
+              width="100%"
             />
-          </Grid>
-          <br />
-          <Grid item xs={12} md={6}>
             <InputTextFields
               name="Total Trail Length (miles)"
               value={totalTrailLength}
               callback={setTotalTrailLength}
-              width="75ch"
+              width="100%"
             />
             <InputTextFields
               name="Total Miles Hiked"
               value={totalMilesHiked}
               callback={setTotalMilesHiked}
-              width="75ch"
+              width="100%"
             />
             <InputTextFields
               name="Conditions"
               value={conditions}
               callback={setConditions}
-              width="75ch"
+              width="100%"
             />
-          </Grid>
-          <Grid item xs={12} md={12}>
             <InputTextFields
               name="Food Consumed"
               value={foodConsumed}
@@ -176,14 +183,12 @@ const TrailEdit = (props) => {
               callback={setWaterConsumed}
               width="100%"
             />
-          </Grid>
-          <Grid item xs={12} md={12}>
             <InputTextFields
               name="Description"
               value={description}
               callback={setDescription}
               width="100%"
-              maxHeight="25ch"
+              maxHeight="100%"
             />
           </Grid>
           <br />
@@ -196,11 +201,10 @@ const TrailEdit = (props) => {
         variant="contained"
         size="medium"
         textAlign="center"
-        onClick={(e) => alert("Tada!")}
+        onClick={props.trail}
       >
         Submit
       </Button>
-      <hr />
     </div>
   );
 };
