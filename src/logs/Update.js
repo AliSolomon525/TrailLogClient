@@ -1,108 +1,118 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import InputTextFields from "../inputs/InputTextFields";
 import APIURL from "../helpers/environment";
-import Modal from "@material-ui/core/Modal";
+import Button from "@material-ui/core/Button";
+
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
   paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    // color: theme.palette.text.secondary,
-  },
-  title: {
-    textAlign: "center",
-  },
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-    marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(1),
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200,
-  },
-  but: {
-    marginLeft: theme.spacing(1),
-    textAlign: "center",
-    marginBottom: theme.spacing(2),
+    position: "absolute",
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
   },
 }));
 
-const TrailCreate = (props) => {
+function Update(props) {
   const classes = useStyles();
-  const [date, setDate] = useState("");
-  const [location, setLocation] = useState("");
-  const [trailName, setTrailName] = useState("");
-  const [totalTrailLength, setTotalTrailLength] = useState("");
-  const [totalMilesHiked, setTotalMilesHiked] = useState("");
-  const [conditions, setConditions] = useState("");
-  const [foodConsumed, setFoodConsumed] = useState("");
-  const [waterConsumed, setWaterConsumed] = useState("");
-  const [description, setDescription] = useState("");
+  const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    fetch(`${APIURL}/api/log`, {
-      method: "POST",
-      body: JSON.stringify({
-        log: {
-          date: date,
-          location: location,
-          trailName: trailName,
-          totalTrailLength: Number(totalTrailLength),
-          totalMilesHiked: +totalMilesHiked,
-          conditions: conditions,
-          foodConsumed: foodConsumed,
-          waterConsumed: waterConsumed,
-          description: description,
-        },
-      }),
-      headers: new Headers({
-        "Content-Type": "application/json",
-        Authorization: props.token,
-      }),
-    })
-      .then((res) => res.json())
-      .then((logData) => {
-        console.log(logData);
-        setDate("");
-        setLocation("");
-        setTrailName("");
-        setTotalTrailLength("");
-        setTotalMilesHiked("");
-        setConditions("");
-        setFoodConsumed("");
-        setWaterConsumed("");
-        setDescription("");
-        props.fetchTrails();
-      });
+  const handleOpen = () => {
+    setOpen(true);
   };
 
-  function formatDate(date) {
-    const normalizeDate = new Date(date);
-    return normalizeDate.toISOString();
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  function showUpdate() {
+    if (open) {
+      setOpen(false);
+    } else {
+      setOpen(true);
+    }
   }
 
-  useEffect(() => {
-    console.log(date);
-  }, [date]);
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      <TrailEdit trailData={props.trailData} />
+    </div>
+  );
 
   return (
-    <div className={classes.root}>
-      <h2 className={classes.title}>Track Your Trail:</h2>
+    <div>
+      <button className="classes.but" type="button" onClick={handleOpen}>
+        Update
+      </button>
+      <Modal className={classes.root} open={open} onClose={handleClose}>
+        {body}
+      </Modal>
+    </div>
+  );
+}
+
+export default Update;
+
+const TrailEdit = (props) => {
+  const classes = useStyles();
+  const [modalStyle] = useState(getModalStyle);
+  const [date, setDate] = useState(props.trailData.date);
+  const [location, setLocation] = useState(props.trailData.location);
+  const [trailName, setTrailName] = useState(props.trailData.trailName);
+  const [totalTrailLength, setTotalTrailLength] = useState(
+    props.trailData.totalTrailLength
+  );
+  const [totalMilesHiked, setTotalMilesHiked] = useState(
+    props.trailData.totalMilesHiked
+  );
+  const [conditions, setConditions] = useState(props.trailData.conditions);
+  const [foodConsumed, setFoodConsumed] = useState(
+    props.trailData.foodConsumed
+  );
+  const [waterConsumed, setWaterConsumed] = useState(
+    props.trailData.waterConsumed
+  );
+  const [description, setDescription] = useState(props.trailData.description);
+
+  //   const trailUpdate = (event, trail) => {
+  //     event.preventDefault();
+  //     fetch(`${APIURL}/api/log/update/${props.trailToUpdate.id}`, {
+  //       method: "PUT",
+  //       body: JSON.stringify({
+  //         log: { description: editDesc },
+  //       }),
+  //       headers: new Headers({
+  //         "Content-Type": "application/json",
+  //         Authorization: props.token,
+  //       }),
+  //     }).then((res) => {
+  //       props.fetchTrails();
+  //       props.updateOff();
+  //     });
+  //   };
+
+  return (
+    <div>
+      <h2>Make An Update:</h2>
       <br />
-      <div className={classes.root}>
+      <div>
         <Grid container spacing={0}>
           <Grid item xs={12} md={6}>
             <form className={classes.container} noValidate>
@@ -186,7 +196,7 @@ const TrailCreate = (props) => {
         variant="contained"
         size="medium"
         textAlign="center"
-        onClick={handleSubmit}
+        onClick={(e) => alert("Tada!")}
       >
         Submit
       </Button>
@@ -194,5 +204,3 @@ const TrailCreate = (props) => {
     </div>
   );
 };
-
-export default TrailCreate;

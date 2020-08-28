@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -18,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
+    position: "absolute",
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
   },
   table: {
     minWidth: 650,
@@ -26,8 +32,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TrailEdit = (props) => {
-  const [editDesc, setEditDesc] = useState(props.trailToUpdate.description);
   const classes = useStyles();
+  const [editDesc, setEditDesc] = useState(props.trailToUpdate.description);
+  const [date, setDate] = useState("");
+  const [location, setLocation] = useState("");
+  const [trailName, setTrailName] = useState("");
+  const [totalTrailLength, setTotalTrailLength] = useState("");
+  const [totalMilesHiked, setTotalMilesHiked] = useState("");
+  const [conditions, setConditions] = useState("");
+  const [foodConsumed, setFoodConsumed] = useState("");
+  const [waterConsumed, setWaterConsumed] = useState("");
+  const [description, setDescription] = useState("");
 
   const trailUpdate = (event, trail) => {
     event.preventDefault();
@@ -62,63 +77,6 @@ const TrailEdit = (props) => {
     ];
     return headers.map((header) => <TableCell>{header}</TableCell>);
   }
-
-  return (
-    //     <Form onSubmit={workoutUpdate}>
-    //       <FormGroup>
-    //         <Label htmlFor="result">Edit Result:</Label>
-    //         <Input
-    //           name="result"
-    //           value={editRes}
-    //           onChange={(e) => setEditRes(e.target.value)}
-    //         />
-    //       </FormGroup>
-    //       <FormGroup>
-    //         <Label htmlFor="description">Edit Description:</Label>
-    //         <Input
-    //           name="description"
-    //           value={editDesc}
-    //           onChange={(e) => setEditDesc(e.target.value)}
-    //         />
-    //       </FormGroup>
-    //       <Button type="submit">Update the workout!</Button>
-    //     </Form>
-    //   </ModalBody>
-    // </Modal>
-    <div>
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>{displayHeaders()}</TableRow>
-          </TableHead>
-          <TableBody>
-            {props.trails ? (
-              props.trails.map((row, index) => (
-                <TableRow key={index}>
-                  <TableCell align="center">{row.date}</TableCell>
-                  <TableCell align="center">{row.location}</TableCell>
-                  <TableCell align="center">{row.trailName}</TableCell>
-                  <TableCell align="center">{row.totalTrailLength}</TableCell>
-                  <TableCell align="center">{row.totalMilesHiked}</TableCell>
-                  <TableCell align="center">{row.conditions}</TableCell>
-                  <TableCell align="center">{row.foodConsumed}</TableCell>
-                  <TableCell align="center">{row.waterConsumed}</TableCell>
-                  <TableCell align="center">{row.description}</TableCell>
-                  <TableCell>
-                    <div>
-                      <Button onClick={trailUpdate}>Update</Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))
-            ) : (
-              <div></div>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
-  );
 };
 
 export default TrailEdit;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -10,6 +10,8 @@ import TableRow from "@material-ui/core/TableRow";
 import TrailCreate from "./TrailCreate";
 import TrailIndex from "./TrailIndex";
 import APIURL from "../helpers/environment";
+import Button from "@material-ui/core/Button";
+import Update from "./Update";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,7 +57,7 @@ function TrailsTable(props) {
   //   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>{displayHeaders()}</TableRow>
@@ -73,6 +75,23 @@ function TrailsTable(props) {
                 <TableCell align="center">{row.foodConsumed}</TableCell>
                 <TableCell align="center">{row.waterConsumed}</TableCell>
                 <TableCell align="center">{row.description}</TableCell>
+                <TableCell align="center">
+                  {/* <Button
+                    onClick={(e) => alert("I worked")}
+                    // editUpdateTrail={editUpdateTrail}
+                  >
+                    Update
+                  </Button> */}
+                  <Update trailData={row} />
+                </TableCell>
+                <TableCell align="center">
+                  <Button
+                    className={classes.but}
+                    onClick={(e) => alert("I worked")}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
               </TableRow>
             ))
           ) : (

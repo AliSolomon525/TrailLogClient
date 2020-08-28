@@ -8,6 +8,7 @@ import Auth from "./auth/Auth";
 import Signup from "./auth/Signup";
 import Login from "./auth/Login";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Update from "./logs/Update";
 
 import "./App.css";
 
@@ -53,6 +54,7 @@ function App() {
       {/* <Image /> */}
       {/* {sessionToken ? <TrailCreate token={sessionToken} /> : <Homepage />} */}
       {/* <Auth updateToken={updateToken} /> */}
+      {/* <Update /> */}
     </div>
   );
 }
