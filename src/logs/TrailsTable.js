@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 function TrailsTable(props) {
   const classes = useStyles();
+  const [showEditModal, setshowEditModal] = useState(false);
 
   function displayHeaders() {
     const headers = [
@@ -76,10 +77,26 @@ function TrailsTable(props) {
                 <TableCell align="center">{row.waterConsumed}</TableCell>
                 <TableCell align="center">{row.description}</TableCell>
                 <TableCell align="center">
-                  <Button className={classes.but} variant="outlined">
+                  <Button
+                    className={classes.but}
+                    variant="outlined"
+                    onClick={() => {
+                      setshowEditModal(true);
+                    }}
+                  >
                     Update
-                    <Update className={classes.but} trailData={row} />
                   </Button>
+                  {showEditModal ? (
+                    <Update
+                      className={classes.but}
+                      trailData={row}
+                      setshowEditModal={setshowEditModal}
+                      fetchTrails={props.fetchTrails}
+                      token={props.token}
+                    />
+                  ) : (
+                    <div></div>
+                  )}
                 </TableCell>
                 <TableCell align="center">
                   <Button

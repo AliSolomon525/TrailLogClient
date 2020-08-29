@@ -64,7 +64,7 @@ function Update(props) {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <TrailEdit trailData={props.trailData} />
+      <TrailEdit {...props} />
     </div>
   );
 
@@ -79,8 +79,6 @@ function Update(props) {
     </div>
   );
 }
-
-export default Update;
 
 const TrailEdit = (props) => {
   const classes = useStyles();
@@ -105,10 +103,20 @@ const TrailEdit = (props) => {
 
   const trailUpdate = (event, trail) => {
     event.preventDefault();
-    fetch(`${APIURL}/api/log/update/${props.trailToUpdate.id}`, {
+    fetch(`${APIURL}/api/log/update/${props.trailData.id}`, {
       method: "PUT",
       body: JSON.stringify({
-        // log: { date, editDate },
+        log: {
+          date: date,
+          location: location,
+          trailName: trailName,
+          totalTrailLength: Number(totalTrailLength),
+          totalMilesHiked: +totalMilesHiked,
+          conditions: conditions,
+          foodConsumed: foodConsumed,
+          waterConsumed: waterConsumed,
+          description: description,
+        },
       }),
       headers: new Headers({
         "Content-Type": "application/json",
@@ -116,7 +124,7 @@ const TrailEdit = (props) => {
       }),
     }).then((res) => {
       props.fetchTrails();
-      props.updateOff();
+      props.setshowEditModal(false);
     });
   };
 
@@ -201,10 +209,12 @@ const TrailEdit = (props) => {
         variant="contained"
         size="medium"
         textAlign="center"
-        onClick={props.trail}
+        onClick={trailUpdate}
       >
         Submit
       </Button>
     </div>
   );
 };
+
+export default Update;
