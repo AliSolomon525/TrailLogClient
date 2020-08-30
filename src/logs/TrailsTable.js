@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 function TrailsTable(props) {
   const classes = useStyles();
-  const [showEditModal, setshowEditModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   function displayHeaders() {
     const headers = [
@@ -46,16 +46,15 @@ function TrailsTable(props) {
     return headers.map((header) => <TableCell>{header}</TableCell>);
   }
 
-  // const deleteOption = (props) => {
-  //   const deleteTrail = (trails) => {
-  //     fetch(`${APIURL}/api/log/delete/${trails.id}`, {
-  //       method: "DELETE",
-  //       headers: new Headers({
-  //         "Content-Type": "application/json",
-  //         Authorization: props.token,
-  //       }),
-  //     }).then(() => props.fetchTrails());
-  //   };
+  const deleteTrail = (id) => {
+    fetch(`${APIURL}/api/log/delete/${id}`, {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: props.token,
+      }),
+    }).then(() => props.fetchTrails());
+  };
 
   return (
     <TableContainer>
@@ -81,7 +80,7 @@ function TrailsTable(props) {
                     className={classes.but}
                     variant="outlined"
                     onClick={() => {
-                      setshowEditModal(true);
+                      setShowEditModal(true);
                     }}
                   >
                     Update
@@ -90,7 +89,7 @@ function TrailsTable(props) {
                     <Update
                       className={classes.but}
                       trailData={row}
-                      setshowEditModal={setshowEditModal}
+                      setShowEditModal={setShowEditModal}
                       fetchTrails={props.fetchTrails}
                       token={props.token}
                     />
@@ -102,7 +101,7 @@ function TrailsTable(props) {
                   <Button
                     variant="outlined"
                     className={classes.but}
-                    // onClick={() => deleteTrail(props.trails)}
+                    onClick={() => deleteTrail(row.id)}
                   >
                     Delete
                   </Button>

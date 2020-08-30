@@ -22,8 +22,8 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 500,
-    height: 500,
+    width: 800,
+    height: 800,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
@@ -44,35 +44,35 @@ const useStyles = makeStyles((theme) => ({
 function Update(props) {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    props.setShowEditModal(false);
   };
 
-  function showUpdate() {
-    if (open) {
-      setOpen(false);
-    } else {
-      setOpen(true);
-    }
-  }
+  // function showUpdate() {
+  //   if (open) {
+  //     setOpen(false);
+  //   } else {
+  //     setOpen(true);
+  //   }
+  // }
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <TrailEdit {...props} />
+      <TrailEdit {...props} handleClose={handleClose} />
     </div>
   );
 
   return (
     <div>
-      <button className="classes.but" type="button" onClick={handleOpen}>
+      {/* <Button type="button" variant="outlined" onClick={handleOpen}>
         Update
-      </button>
+      </Button> */}
       <Modal className={classes.root} open={open} onClose={handleClose}>
         {body}
       </Modal>
@@ -124,7 +124,7 @@ const TrailEdit = (props) => {
       }),
     }).then((res) => {
       props.fetchTrails();
-      props.setshowEditModal(false);
+      props.setShowEditModal(false);
     });
   };
 
@@ -212,6 +212,17 @@ const TrailEdit = (props) => {
         onClick={trailUpdate}
       >
         Submit
+      </Button>
+      {""}
+      <Button
+        className={classes.but}
+        type="submit"
+        variant="contained"
+        size="medium"
+        textAlign="center"
+        onClick={props.handleClose}
+      >
+        Cancel
       </Button>
     </div>
   );

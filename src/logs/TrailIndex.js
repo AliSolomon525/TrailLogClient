@@ -52,7 +52,7 @@ const TrailIndex = (props) => {
         fetchTrails={fetchTrails}
         token={props.token}
       />
-      {updateActive ? (
+      {/* {updateActive ? (
         <TrailEdit
           trailToUpdate={trailToUpdate}
           updateOff={updateOff}
@@ -61,7 +61,7 @@ const TrailIndex = (props) => {
         />
       ) : (
         <div></div>
-      )}
+      )} */}
     </Container>
   );
 };
