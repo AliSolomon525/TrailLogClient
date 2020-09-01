@@ -25,11 +25,14 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
+  // headers: {},
 }));
 
 function TrailsTable(props) {
   const classes = useStyles();
   const [showEditModal, setShowEditModal] = useState(false);
+
+  const [dataRow, setDataRow] = useState({});
 
   function displayHeaders() {
     const headers = [
@@ -43,7 +46,9 @@ function TrailsTable(props) {
       "Water Consumed",
       "Description",
     ];
-    return headers.map((header) => <TableCell>{header}</TableCell>);
+    return headers.map((header) => (
+      <TableCell className="headers">{header}</TableCell>
+    ));
   }
 
   const deleteTrail = (id) => {
@@ -57,7 +62,7 @@ function TrailsTable(props) {
   };
 
   return (
-    <TableContainer>
+    <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>{displayHeaders()}</TableRow>
@@ -66,6 +71,7 @@ function TrailsTable(props) {
           {props.trails ? (
             props.trails.map((row, index) => (
               <TableRow key={index}>
+                {console.log(row)}
                 <TableCell align="center">{row.date.slice(0, 10)}</TableCell>
                 <TableCell align="center">{row.location}</TableCell>
                 <TableCell align="center">{row.trailName}</TableCell>
@@ -81,14 +87,16 @@ function TrailsTable(props) {
                     variant="outlined"
                     onClick={() => {
                       setShowEditModal(true);
+                      setDataRow(row);
                     }}
                   >
                     Update
                   </Button>
                   {showEditModal ? (
                     <Update
+                      key={index}
                       className={classes.but}
-                      trailData={row}
+                      trailData={dataRow}
                       setShowEditModal={setShowEditModal}
                       fetchTrails={props.fetchTrails}
                       token={props.token}

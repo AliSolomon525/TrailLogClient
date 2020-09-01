@@ -138,19 +138,19 @@ const TrailCreate = (props) => {
               name="Total Trail Length (miles)"
               value={totalTrailLength}
               callback={setTotalTrailLength}
-              width="75ch"
+              width="71.5ch"
             />
             <InputTextFields
               name="Total Miles Hiked"
               value={totalMilesHiked}
               callback={setTotalMilesHiked}
-              width="75ch"
+              width="71.5ch"
             />
             <InputTextFields
               name="Conditions"
               value={conditions}
               callback={setConditions}
-              width="75ch"
+              width="71.5ch"
             />
           </Grid>
           <Grid item xs={12} md={12}>
