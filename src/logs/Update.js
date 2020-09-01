@@ -141,7 +141,7 @@ const TrailEdit = (props) => {
                 variant="outlined"
                 label="Date"
                 type="date"
-                // value={editDate}
+                value={date}
                 onChange={(e) => setDate(e.target.value)}
                 className={classes.textField}
                 InputLabelProps={{
