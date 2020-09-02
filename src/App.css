@@ -20,3 +20,12 @@ h2 {
   text-transform: uppercase;
   padding: 2px;
 } */
+
+.about {
+  text-align: left;
+  font-weight: bold;
+  justify-content: left;
+  text-transform: uppercase;
+  color: black;
+  font-family: Verdana, Geneva, sans-serif;
+}

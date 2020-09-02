@@ -56,7 +56,6 @@ function App() {
       {/* {sessionToken ? <TrailCreate token={sessionToken} /> : <Homepage />} */}
       {/* <Auth updateToken={updateToken} /> */}
       {/* <Update /> */}
-      {/* <About /> */}
     </div>
   );
 }

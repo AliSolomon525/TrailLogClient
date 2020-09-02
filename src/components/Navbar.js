@@ -9,6 +9,7 @@ import Signup from "../auth/Signup";
 import Login from "../auth/Login";
 // import Auth from "../auth/Auth";
 // import Image from "./Image";
+import About from "./About";
 
 const useStyles = makeStyles({
   root: {
@@ -56,6 +57,9 @@ const Navbar = (props) => {
         <Toolbar className={classes.color}>
           <Typography variant="h6" className={classes.title}>
             Trail Tracker
+          </Typography>
+          <Typography variant="h6" className={classes.title}>
+            <About />
           </Typography>
           <Button type="button" color="white" onClick={showSignup}>
             Signup
